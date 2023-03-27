@@ -39,6 +39,24 @@ sudo apt-get install openjdk-11-jdk -y
 ##########################################################################################
 . ~/file_variables.output
 
+
+##########################################################################################
+#  install community edition of redpanda
+##########################################################################################
+
+echo
+echo "---------------------------------------------------------------------"
+echo "starting redpanda install ..."
+echo "---------------------------------------------------------------------"
+echo
+
+## Run the setup script to download and install the repo
+#curl -1sLf 'https://dl.redpanda.com/nzc4ZYQK3WRGd9sy/redpanda/cfg/setup/bash.deb.sh' | sudo -E bash
+sudo -E bash  ~/redpanda_tabular_workshop/downloads/$PANDA_REPO_FILE
+
+sudo apt-get update
+sudo apt-get install redpanda=22.3.12-1 -y
+
 ##########################################################################################
 #  load the Tabular enviroment properties from 'setup.properties' file
 ##########################################################################################
@@ -60,6 +78,21 @@ export PATH="~/.local/bin:$PATH"
 ##########################################################################################
 echo "" >> ~/.profile
 echo "#  set path variables here:" >> ~/.profile
+echo "export REDPANDA_HOME=~/.local/bin" >> ~/.profile
+echo "PATH=$PATH:$REDPANDA_HOME" >> ~/.profile
+
+##########################################################################################
+#  unzip rpk to --> ~/.local/bin
+##########################################################################################
+#unzip rpk-linux-amd64.zip -d ~/.local/bin/
+unzip ~/redpanda_tabular_workshop/downloads/$PANDA_FILE -d ~/.local/bin/
+
+sleep 10
+
+##########################################################################################
+#  Install the red panda console package
+##########################################################################################
+sudo apt-get install redpanda-console=2.1.1 -y
 
 #########################################################################################
 #  Install jupyter hub and nginx
