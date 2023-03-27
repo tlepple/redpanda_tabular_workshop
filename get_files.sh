@@ -44,6 +44,12 @@ KCONNECT_JDBC_JAR=https://jdbc.postgresql.org/download/postgresql-42.5.1.jar; ec
 DBZ_CONNECT_FILE=https://repo1.maven.org/maven2/io/debezium/debezium-connector-postgres/2.1.1.Final/debezium-connector-postgres-2.1.1.Final-plugin.tar.gz; echo "DEBEZIUM_CONNECT_FILE=${DBZ_CONNECT_FILE##*/}" >> ~/file_variables.output
 
 ##########################################################################################
+#  REDPANDA ITEMS:
+##########################################################################################
+REDPANDA_REPO_FILE=https://dl.redpanda.com/nzc4ZYQK3WRGd9sy/redpanda/cfg/setup/bash.deb.sh; echo "PANDA_REPO_FILE=${REDPANDA_REPO_FILE##*/}" >> ~/file_variables.output
+REDPANDA_FILE=https://github.com/redpanda-data/redpanda/releases/latest/download/rpk-linux-amd64.zip; echo "PANDA_FILE=${REDPANDA_FILE##*/}" >> ~/file_variables.output
+
+##########################################################################################
 #  POSTGRESQL ITEMS:
 ##########################################################################################
 PSQL_REPO_KEY=https://www.postgresql.org/media/keys/ACCC4CF8.asc; echo "POSTGRESQL_KEY_FILE=${PSQL_REPO_KEY##*/}" >> ~/file_variables.output
