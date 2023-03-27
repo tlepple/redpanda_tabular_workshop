@@ -134,7 +134,7 @@ sudo apt-get install nginx -y
 sudo sed -e "s,# c.JupyterHub.bind_url = 'http://:8000',c.JupyterHub.bind_url = 'http://127.0.0.1:8000/jupyter',g" -i /opt/jupyterhub/etc/jupyterhub/jupyterhub_config.py
 
 # copy the config template to the nginx service
-sudo cp /home/datagen/tabular-workshop/nginx_stuff/default.conf.template /etc/nginx/sites-available/default
+sudo cp /home/datagen/redpanda_tabular_workshop/nginx_stuff/default.conf.template /etc/nginx/sites-available/default
 
 #  set jupyter security module:
 #  not sure why it needs this but it wouldn't run without
@@ -177,7 +177,7 @@ sudo apt-get install -y jq
 ##########################################################################################
 PRIVATE_IP=`ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p'`
 
-sed -e "s,<private_ip>,$PRIVATE_IP,g" -i ~/tabular-workshop/datagen/pg_upsert_dg.py
+sed -e "s,<private_ip>,$PRIVATE_IP,g" -i ~/redpanda_tabular_workshop/datagen/pg_upsert_dg.py
 
 ##########################################################################################
 #  install a specific version of postgresql (version 14)
@@ -194,7 +194,7 @@ apt-cache policy postgresql
 ##########################################################################################
 #  install the pgp key for this version of postgresql:
 ##########################################################################################
-sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg ~/tabular-workshop/downloads/$POSTGRESQL_KEY_FILE 
+sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/postgresql.gpg ~/redpanda_tabular_workshop/downloads/$POSTGRESQL_KEY_FILE 
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
 
 sudo apt-get update
@@ -303,13 +303,13 @@ mkdir -p ~/kafka_connect/plugins
 sudo wget https://dlcdn.apache.org/kafka/KEYS
 
 #untar the file:
-tar -xzf  ~/tabular-workshop/downloads/$KAFKA_CONNECT_FILE --directory ~/kafka_connect/
+tar -xzf  ~/redpanda_tabular_workshop/downloads/$KAFKA_CONNECT_FILE --directory ~/kafka_connect/
 
 # remove the tar file:
 #rm ~/kafka_connect/kafka_2.13-3.3.2.tgz
 
 # copy the properties files:
-cp ~/tabular-workshop/kafka_connect/*.properties ~/kafka_connect/configuration/
+cp ~/redpanda_tabular_workshop/kafka_connect/*.properties ~/kafka_connect/configuration/
 
 # update the private IP address in this config file:
 
