@@ -206,6 +206,25 @@ sudo apt-get install python3-pip -y
 sudo apt-get install -y jq
 
 ##########################################################################################
+#  create the redpanda conig.yaml  #  needed to change default console port to 8888 to avoid conflict with debezium server
+##########################################################################################
+cat <<EOF > ~/redpanda-console-config.yaml
+kafka:
+  brokers: "<private_ip>:9092"
+  schemaRegistry:
+    enabled: true
+    urls: ["http://<private_ip>:8081"]
+connect:
+  enabled: true
+  clusters:
+    - name: postgres-dbz-connector
+      url: http://<private_ip>:8083
+server:
+    listenPort: 8888
+EOF
+
+sudo cp ~/redpanda_tabular_workshop/redpanda/redpanda.yaml /etc/redpanda/
+##########################################################################################
 #  Need to update the value of '<private_ip>' in a bunch of files
 ##########################################################################################
 PRIVATE_IP=`ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p'`
