@@ -78,8 +78,7 @@ export PATH="~/.local/bin:$PATH"
 ##########################################################################################
 echo "" >> ~/.profile
 echo "#  set path variables here:" >> ~/.profile
-echo "export REDPANDA_HOME=~/.local/bin" >> ~/.profile
-echo "PATH=$PATH:$REDPANDA_HOME" >> ~/.profile
+
 
 ##########################################################################################
 #  unzip rpk to --> ~/.local/bin
@@ -566,6 +565,7 @@ EOF
 export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export SPARK_HOME=/opt/spark
 export CONDA_HOME=/opt/conda
+epxort REDPANDA_HOME=~/.local/bin
 
 echo "" >> ~/.profile
 
@@ -577,12 +577,13 @@ echo "export SPARK_HOME=/opt/spark" >> ~/.profile
 
 echo "export CONDA_HOME=/opt/conda" >> ~/.profile
 
+echo "epxort REDPANDA_HOME=~/.local/bin" >> ~/.profile
+
 #echo "export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin:$JAVA_HOME/bin" >> ~/.profile
-echo "export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin:$JAVA_HOME/bin:$CONDA_HOME/bin" >> ~/.profile
+echo "export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin:$JAVA_HOME/bin:$CONDA_HOME/bin:$REDPANDA_HOME" >> ~/.profile
 
 # let's make this visible
 . ~/.profile
-
 
 ##########################################################################################
 #  pip install some items (this section is a hack, it isn't a best practice ;) 
