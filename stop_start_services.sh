@@ -14,7 +14,20 @@ echo "stopping spark master..."
 echo
 sleep 5
 
+##########################################################################################
+#  Stop of panda items
+##########################################################################################
 
+
+echo "stopping redpanda..."
+sudo systemctl stop redpanda
+echo
+sleep 5
+
+echo "stopping redpanda console..."
+sudo systemctl stop redpanda-console
+echo
+sleep 5
 
 ##########################################################################################
 #  Start of Spark items
@@ -29,3 +42,17 @@ echo "starting spark worker..."
 echo
 sleep 5
 
+##########################################################################################
+#  Start of panda items
+##########################################################################################
+
+
+echo "starting redpanda..."
+sudo systemctl start redpanda
+echo
+sleep 5
+
+echo "starting redpanda console..."
+sudo systemctl start redpanda-console
+echo
+sleep 5
