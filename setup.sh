@@ -3,7 +3,7 @@
 ##########################################################################################
 #  let's caputure install output to a log file
 ##########################################################################################
-LOGPATH=${HOME}/tabular-workshop/logs
+LOGPATH=${HOME}/redpanda_tabular_workshop/logs
 OUTPUTLOG=${LOGPATH}/logouput_`date +%d_%m_%y_%H.%M.%S`.log
 ERRORLOG=${LOGPATH}/logerror_`date +%d_%m_%y_%H.%M.%S`.log
 mkdir -p "$(dirname "$OUTPUTLOG")"
@@ -32,7 +32,7 @@ sudo apt-get install openjdk-11-jdk -y
 ##########################################################################################
 #  run the 'get_files.sh' script to validate and retrieve files first
 ##########################################################################################
-. ~/tabular-workshop/get_files.sh
+. ~/redpanda_tabular_workshop/get_files.sh
 
 ##########################################################################################
 #  need to load the file name variables we wrote to a file in the scipt 'get_files.sh'
@@ -42,7 +42,7 @@ sudo apt-get install openjdk-11-jdk -y
 ##########################################################################################
 #  load the Tabular enviroment properties from 'setup.properties' file
 ##########################################################################################
-. ~/tabular-workshop/setup.properties
+. ~/redpanda_tabular_workshop/setup.properties
 
 ##########################################################################################
 #  create a few directories
@@ -71,7 +71,7 @@ echo "Starting Jupyterhub setup..."
 echo "---------------------------------------------------------------------"
 echo
 
-#cd ~/tabular-workshop
+#cd ~/redpanda_tabular_workshop
 
 sudo apt-get install python3.8-venv -y
 sudo python3 -m venv /opt/jupyterhub/
@@ -251,10 +251,10 @@ sudo systemctl restart postgresql
 ##########################################################################################
 ## Run the sql file to create the schema for all DB’s
 ##########################################################################################
-sudo -u postgres psql < ~/tabular-workshop/db_ddl/create_user_datagen.sql
-sudo -u datagen psql < ~/tabular-workshop/db_ddl/customer_ddl.sql
-sudo -u datagen psql < ~/tabular-workshop/db_ddl/customer_function_ddl.sql
-sudo -u datagen psql < ~/tabular-workshop/db_ddl/grants4dbz.sql
+sudo -u postgres psql < ~/redpanda_tabular_workshop/db_ddl/create_user_datagen.sql
+sudo -u datagen psql < ~/redpanda_tabular_workshop/db_ddl/customer_ddl.sql
+sudo -u datagen psql < ~/redpanda_tabular_workshop/db_ddl/customer_function_ddl.sql
+sudo -u datagen psql < ~/redpanda_tabular_workshop/db_ddl/grants4dbz.sql
 echo
 echo "---------------------------------------------------------------------"
 echo "postgresql install completed..."
@@ -273,7 +273,7 @@ echo
 ##########################################################################################
 #   copy these files to the os user 'datagen' and set owner and permissions
 ##########################################################################################
-mv ~/tabular-workshop/datagen/* /home/datagen/datagen/
+mv ~/redpanda_tabular_workshop/datagen/* /home/datagen/datagen/
 chown datagen:datagen -R /home/datagen/
 
 ##########################################################################################
@@ -320,7 +320,7 @@ sed -e "s,<private_ip>,$PRIVATE_IP,g" -i ~/kafka_connect/configuration/connect.p
 #  copy debezium items
 ##########################################################################################
 # untar this file:
-tar -xzf ~/tabular-workshop/downloads/$DEBEZIUM_CONNECT_FILE --directory ~/kafka_connect/plugins/
+tar -xzf ~/redpanda_tabular_workshop/downloads/$DEBEZIUM_CONNECT_FILE --directory ~/kafka_connect/plugins/
 
 # remove tar file
 #rm ~/kafka_connect/debezium-connector-postgres-2.1.1.Final-plugin.tar.gz
@@ -332,7 +332,7 @@ tar -xzf ~/tabular-workshop/downloads/$DEBEZIUM_CONNECT_FILE --directory ~/kafka
 ##########################################################################################
 #  copy jars to the kafka libs folder
 ##########################################################################################
-cp ~/tabular-workshop/downloads/$KCONNECT_JDBC_FILE ~/kafka_connect/kafka_2.13-3.3.2/libs/
+cp ~/redpanda_tabular_workshop/downloads/$KCONNECT_JDBC_FILE ~/kafka_connect/kafka_2.13-3.3.2/libs/
 
 echo
 echo "---------------------------------------------------------------------"
@@ -355,7 +355,7 @@ sudo apt-get install maven -y
 ##########################################################################################
 #  copy apache spark standalone
 ##########################################################################################
-tar -xzvf ~/tabular-workshop/downloads/$SPARK_STANDALONE_FILE --directory ~
+tar -xzvf ~/redpanda_tabular_workshop/downloads/$SPARK_STANDALONE_FILE --directory ~
 SPARK_DIR_NAME=$(basename $SPARK_STANDALONE_FILE .tgz)
 sudo mv ~/$SPARK_DIR_NAME /opt/spark
 
@@ -390,16 +390,16 @@ sudo apt-get install -y mlocate
 ##########################################################################################
 #  copy the jdbc jar file for postgres:  
 ##########################################################################################
-cp ~/tabular-workshop/downloads/$POSTGRESQL_FILE /opt/spark/jars/
+cp ~/redpanda_tabular_workshop/downloads/$POSTGRESQL_FILE /opt/spark/jars/
 
 ##########################################################################################
 #  copy iceberg spark runtime items
 ##########################################################################################
-cp ~/tabular-workshop/downloads/$SPARK_ICEBERG_FILE /opt/spark/jars/
-cp ~/tabular-workshop/downloads/$SPARK_SQL_KAFKA_FILE /opt/spark/jars/
-cp ~/tabular-workshop/downloads/$SPARK_TOKEN_FILE /opt/spark/jars/
-cp ~/tabular-workshop/downloads/$KAFKA_CLIENT_FILE /opt/spark/jars/
-cp ~/tabular-workshop/downloads/$COMMONS_POOL2_FILE /opt/spark/jars/
+cp ~/redpanda_tabular_workshop/downloads/$SPARK_ICEBERG_FILE /opt/spark/jars/
+cp ~/redpanda_tabular_workshop/downloads/$SPARK_SQL_KAFKA_FILE /opt/spark/jars/
+cp ~/redpanda_tabular_workshop/downloads/$SPARK_TOKEN_FILE /opt/spark/jars/
+cp ~/redpanda_tabular_workshop/downloads/$KAFKA_CLIENT_FILE /opt/spark/jars/
+cp ~/redpanda_tabular_workshop/downloads/$COMMONS_POOL2_FILE /opt/spark/jars/
 echo
 echo "---------------------------------------------------------------------"
 echo "iceberg & spark items completed..."
@@ -409,7 +409,7 @@ echo
 ##########################################################################################
 #  copy tablular items
 ##########################################################################################
-cp ~/tabular-workshop/downloads/$TABULAR_CLIENT_FILE /opt/spark/jars/
+cp ~/redpanda_tabular_workshop/downloads/$TABULAR_CLIENT_FILE /opt/spark/jars/
 echo
 echo "---------------------------------------------------------------------"
 echo "Tabular items completed..."
@@ -420,12 +420,12 @@ echo
 #  update tablular specific variables in
 ##########################################################################################
 # conf.properties
-sed -e "s,<your warehouse>,$TABULAR_WAREHOUSE_NAME,g" -i ~/tabular-workshop/spark_items/conf.properties
-sed -e "s,<your credential>,$TABULAR_CREDENTIAL,g" -i ~/tabular-workshop/spark_items/conf.properties
+sed -e "s,<your warehouse>,$TABULAR_WAREHOUSE_NAME,g" -i ~/redpanda_tabular_workshop/spark_items/conf.properties
+sed -e "s,<your credential>,$TABULAR_CREDENTIAL,g" -i ~/redpanda_tabular_workshop/spark_items/conf.properties
 
 #  stream_customer_ddl.sql
-sed -e "s,<your warehouse>,$TABULAR_WAREHOUSE_NAME,g" -i ~/tabular-workshop/spark_items/stream_customer_ddl.sql
-sed -e "s,<your database>,$TABULAR_DB_NAME,g" -i ~/tabular-workshop/spark_items/stream_customer_ddl.sql
+sed -e "s,<your warehouse>,$TABULAR_WAREHOUSE_NAME,g" -i ~/redpanda_tabular_workshop/spark_items/stream_customer_ddl.sql
+sed -e "s,<your database>,$TABULAR_DB_NAME,g" -i ~/redpanda_tabular_workshop/spark_items/stream_customer_ddl.sql
 
 #  
 echo
@@ -560,7 +560,7 @@ sudo /opt/conda/envs/python/bin/python3 -m pip tabulario
 #########################################################################################
 sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
 
-sudo apt-key add ~/tabular-workshop/downloads/$DOCKER_REPO_KEY_FILE
+sudo apt-key add ~/redpanda_tabular_workshop/downloads/$DOCKER_REPO_KEY_FILE
 sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
 apt-cache policy docker-ce
 sudo apt-get install -y docker-ce
@@ -604,7 +604,7 @@ mkdir -p ~/debezium-server-iceberg/data
 #########################################################################################
 # configure our dbz source-sink.properties file
 #########################################################################################
-cp ~/tabular-workshop/dbz_server/application.properties ~/appdist/debezium-server-iceberg/conf/
+cp ~/redpanda_tabular_workshop/dbz_server/application.properties ~/appdist/debezium-server-iceberg/conf/
 
 # remove the example file:
 rm /home/datagen/appdist/debezium-server-iceberg/conf/application.properties.example
@@ -618,7 +618,7 @@ mkdir ~/appdist/debezium-server-iceberg/data
 #########################################################################################
 # Tabular Client jars for 'Debezium Server'
 #########################################################################################
-cp ~/tabular-workshop/downloads/$TABULAR_CLIENT_FILE ~/appdist/debezium-server-iceberg/lib/
+cp ~/redpanda_tabular_workshop/downloads/$TABULAR_CLIENT_FILE ~/appdist/debezium-server-iceberg/lib/
 
 ##########################################################################################
 #  update tablular specific variables in debezium server configs
@@ -668,7 +668,7 @@ echo
 #########################################################################################
 #  copy spark-sql and pyspark items
 #########################################################################################
-cp ~/tabular-workshop/spark_items/* /opt/spark/sql
+cp ~/redpanda_tabular_workshop/spark_items/* /opt/spark/sql
 
 #########################################################################################
 #  Install apache web server to host adminer
