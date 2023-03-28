@@ -233,6 +233,27 @@ sudo sed -e "s,<private_ip>,$PRIVATE_IP,g" -i /etc/redpanda/redpanda.yaml
 sed -e "s,<private_ip>,$PRIVATE_IP,g" -i ~/redpanda_tabular_workshop/datagen/pg_upsert_dg.py
 
 ##########################################################################################
+#   move this file to proper directory
+##########################################################################################
+sudo mv ~/redpanda-console-config.yaml /etc/redpanda/redpanda-console-config.yaml
+sudo chown redpanda:redpanda -R /etc/redpanda
+
+##########################################################################################
+#  start redpanda & the console:
+##########################################################################################
+sudo systemctl enable redpanda
+sudo systemctl enable redpanda-console
+
+sudo systemctl start redpanda
+sudo systemctl start redpanda-console
+
+echo
+echo "---------------------------------------------------------------------"
+echo "redpanda setup completed..."
+echo "---------------------------------------------------------------------"
+echo
+
+##########################################################################################
 #  install a specific version of postgresql (version 14)
 ##########################################################################################
 echo
