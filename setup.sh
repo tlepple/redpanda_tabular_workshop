@@ -514,8 +514,8 @@ echo "export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin:$JAVA_HOME/bin:$CONDA_H
 # Tabular Python Library
 ##########################################################################################
 pip3 install tabulario
-sudo /opt/jupyterhub/bin/python3 -m pip install tabulario 
-sudo /opt/conda/envs/python/bin/python3 -m pip tabulario
+#sudo /opt/jupyterhub/bin/python3 -m pip install tabulario 
+#sudo /opt/conda/envs/python/bin/python3 -m pip tabulario
 
 #########################################################################################
 # install docker ce (needed for dbz server build with maven)
