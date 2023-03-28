@@ -132,6 +132,7 @@ sudo sed -e "s,<private_ip>,$PRIVATE_IP,g" -i ~/redpanda-console-config.yaml
 sudo sed -e "s,<private_ip>,$PRIVATE_IP,g" -i /etc/redpanda/redpanda.yaml
 
 sed -e "s,<private_ip>,$PRIVATE_IP,g" -i ~/redpanda_tabular_workshop/datagen/pg_upsert_dg.py
+sed -e "s,<private_ip>,$PRIVATE_IP,g" -i ~/redpanda_tabular_workshop/datagen/redpanda_dg.py
 
 ##########################################################################################
 #   move this file to proper directory
