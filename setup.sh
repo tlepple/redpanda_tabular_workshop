@@ -577,7 +577,7 @@ echo "export SPARK_HOME=/opt/spark" >> ~/.profile
 
 echo "export CONDA_HOME=/opt/conda" >> ~/.profile
 
-echo "epxort REDPANDA_HOME=~/.local/bin" >> ~/.profile
+echo "export REDPANDA_HOME=~/.local/bin" >> ~/.profile
 
 #echo "export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin:$JAVA_HOME/bin" >> ~/.profile
 echo "export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin:$JAVA_HOME/bin:$CONDA_HOME/bin:$REDPANDA_HOME" >> ~/.profile
